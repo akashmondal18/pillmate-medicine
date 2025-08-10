@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Details</title>
+    <link rel="stylesheet" href="medicine-details.css">
+</head>
+<body>
+
+<div class="container">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+    <div class="medicine-card">
+        <img id="medicine-image" src="" alt="Medicine Image">
+        <h1 id="medicine-name"></h1>
+        <p class="price" id="medicine-price"></p>
+        
+        <div class="section">
+            <h2>Description</h2>
+            <p id="medicine-description"></p>
+        </div>
+        
+        <div class="section">
+            <h2>Benefits</h2>
+            <ul id="medicine-benefits"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Medicine Data
+    const medicineData = {
+        "Hansaplast Assorted Antiseptic Bandages": {
+            description: "Helps protect minor wounds from dirt and bacteria, promoting faster healing.",
+            benefits: [
+                "Protection from infection",
+                "Breathable material",
+                "Strong adhesive"
+            ]
+        },
+        "Unienzyme Fungal Diastase | Papain": {
+            description: "Digestive enzyme supplement for proper digestion of carbs, proteins, and fats.",
+            benefits: [
+                "Relieves indigestion",
+                "Reduces bloating",
+                "Improves digestion"
+            ]
+        },
+        "Evion 400mg Strip Of 20 Capsules": {
+            description: "Contains Vitamin E, supports skin health and overall well-being.",
+            benefits: [
+                "Improves skin texture",
+                "Supports heart health",
+                "Antioxidant protection"
+            ]
+        },
+        "Improsyn Strip Of 10 Tablets": {
+            description: "Relieves joint pain and supports cartilage repair.",
+            benefits: [
+                "Improves flexibility",
+                "Reduces inflammation",
+                "Aids cartilage repair"
+            ]
+        },
+        "Fixderma Salyzap Az For Body Acne Spray": {
+            description: "Special spray to treat body acne on back, chest, and arms.",
+            benefits: [
+                "Reduces acne",
+                "Easy spray application",
+                "Prevents breakouts"
+            ]
+        },
+        "Revital Men Complete Multivitamin": {
+            description: "Daily supplement for men's health and energy.",
+            benefits: [
+                "Boosts energy",
+                "Strengthens immunity",
+                "Improves stamina"
+            ]
+        },
+        "Paracetamol 500mg Tablets": {
+            description: "Pain reliever and fever reducer.",
+            benefits: [
+                "Reduces fever",
+                "Relieves mild pain",
+                "Safe for most users"
+            ]
+        },
+        "Amoxicillin 500mg Capsules": {
+            description: "Antibiotic for bacterial infections.",
+            benefits: [
+                "Treats bacterial infections",
+                "Effective against various bacteria",
+                "Fast acting"
+            ]
+        },
+        "Cetirizine 10mg Tablets": {
+            description: "Antihistamine for allergy relief.",
+            benefits: [
+                "Reduces allergy symptoms",
+                "Non-drowsy formula",
+                "Quick relief"
+            ]
+        },
+        "Vitamin C 1000mg Chewable Tablets": {
+            description: "Boosts immunity and promotes skin health.",
+            benefits: [
+                "Enhances immune system",
+                "Promotes collagen production",
+                "Antioxidant support"
+            ]
+        },
+        "Metformin 500mg Tablets": {
+            description: "Helps control blood sugar in type 2 diabetes.",
+            benefits: [
+                "Lowers blood sugar",
+                "Improves insulin sensitivity",
+                "Weight management aid"
+            ]
+        },
+        "Ibuprofen 400mg Tablets": {
+            description: "Pain reliever and anti-inflammatory.",
+            benefits: [
+                "Reduces inflammation",
+                "Relieves pain",
+                "Lowers fever"
+            ]
+        }
+    };
+
+    // Get URL Params
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const price = params.get('price');
+    const image = params.get('image');
+
+    // Set Values
+    document.getElementById('medicine-name').textContent = name;
+    document.getElementById('medicine-price').textContent = `Price: ₹${price}`;
+    document.getElementById('medicine-image').src = image;
+
+    if (medicineData[name]) {
+        document.getElementById('medicine-description').textContent = medicineData[name].description;
+        const benefitsList = document.getElementById('medicine-benefits');
+        medicineData[name].benefits.forEach(benefit => {
+            const li = document.createElement('li');
+            li.textContent = benefit;
+            benefitsList.appendChild(li);
+        });
+    } else {
+        document.getElementById('medicine-description').textContent = "No details available.";
+    }
+</script>
+
+</body>
+</html>
